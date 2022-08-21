@@ -1,0 +1,7 @@
+22/08/21
+    - 0.1.1 (api) 
+        send file by url 
+    - 0.1.2 (client)
+        convertedImgSrc
+
+    
