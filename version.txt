@@ -4,4 +4,11 @@
     - 0.1.2 (client)
         convertedImgSrc
 
+22/08/22
+    - 0.1.3 (client)
+        drag and drop image
+
+to do list
+    - client : canvas 
+
     

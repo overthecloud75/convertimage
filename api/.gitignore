@@ -8,3 +8,4 @@ images
 mainconfig.py
 pyvenv.cfg
 pyodbc.pyi
+model.ckpt
