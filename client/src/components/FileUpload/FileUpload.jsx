@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import axios from 'axios'
 import './fileUpload.css'
 import Canvas from '../Canvas/Canvas'
 
 const FileUpload = () => {
+
+    // useRef
+    const canvasRef = useRef(null)
+    const contextRef = useRef(null)
+
     // file, drag, imgSrc, convertedImgSrc
     const [file, setFile] = useState()
     const [dragActive, setDragActive] = useState(false)
@@ -27,7 +32,7 @@ const FileUpload = () => {
         }
     }
 
-    // submit image 
+    // submit original image and mask image 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const url = '/uploadFile/'
@@ -38,7 +43,8 @@ const FileUpload = () => {
             headers: {
                 'content-type': 'multipart/form-data',
             },
-        };
+        }
+        // submit original image 
         try { 
             const res = await axios.post(url, formData, config) 
             console.log('res.data', res.data)
@@ -48,6 +54,11 @@ const FileUpload = () => {
         catch(err) {
             console.log('err', err)
         }
+       
+        // get image from canvas 
+        const image = new Image()
+        image.src = canvasRef.current.toDataURL()
+        console.log('image', image)
     }
 
     // handle drag events
@@ -69,7 +80,6 @@ const FileUpload = () => {
     // get canvasSize
     const onImgLoad = ({target: img}) => {
         const {offsetHeight, offsetWidth} = img
-        console.log('offset', offsetHeight, offsetWidth)
         setCanvasSize({height: offsetHeight, width: offsetWidth})
     }
 
@@ -103,7 +113,9 @@ const FileUpload = () => {
                     )}
                     {!isDrawCanvas&&
                         <Canvas
-                            canvasSize={canvasSize}    
+                            canvasSize={canvasSize} 
+                            canvasRef={canvasRef}
+                            contextRef={contextRef}   
                         />
                     }
                 </label>

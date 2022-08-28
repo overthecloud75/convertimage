@@ -15,7 +15,11 @@
     - 0.1.5 (client)
         mask with canvas
 
+    - 0.1.6 (client)
+        canvas.toDataUrl()
+
 to do list
-    - client : canvas 
+    - client : upload mask image 
+    - api : upload mask image
 
     

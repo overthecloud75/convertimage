@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import './canvas.css'
 
-const Canvas = ({canvasSize}) => {
+const Canvas = ({canvasSize, canvasRef, contextRef}) => {
 
-    const canvasRef = useRef(null)
-    const contextRef = useRef(null)
     const [ctx, setCtx] = useState()
     const [isDrawing, setIsDrawing] = useState(false)
     
@@ -18,7 +16,7 @@ const Canvas = ({canvasSize}) => {
         context.lineWidth = 20
         contextRef.current = context 
         setCtx(contextRef.current)
-    }, [])
+    }, [canvasSize.width, canvasSize.height, canvasRef, contextRef])
     
     const startDrawing = () => {
         setIsDrawing(true)
@@ -29,7 +27,6 @@ const Canvas = ({canvasSize}) => {
     }
 
     const drawing = ({nativeEvent}) => {
-        console.log('e', nativeEvent)
         const {offsetX, offsetY} = nativeEvent
         if (ctx) {
             if (!isDrawing) {
