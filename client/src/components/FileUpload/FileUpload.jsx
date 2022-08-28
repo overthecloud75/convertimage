@@ -6,7 +6,7 @@ const FileUpload = () => {
     // file, drag, imgSrc, convertedImgSrc
     const [file, setFile] = useState()
     const [dragActive, setDragActive] = useState(false)
-    const [imgSrc, setImgSrc] = useState()
+    const [imgSrc, setImgSrc] = useState('')
     const [convertedImgSrc, setConvertedImgSrc] = useState('')
 
     const handleChange = (e) => {
@@ -57,7 +57,7 @@ const FileUpload = () => {
     };
 
     return (
-        <>
+        <div className="wrapper">
             <form 
                 id="form-file-upload"
                 onDragEnter={handleDrag} 
@@ -84,19 +84,25 @@ const FileUpload = () => {
                     />
                 }
             </form>
-            <img 
-                src={imgSrc}
-                alt=''
-            />
-            {convertedImgSrc&&
-                (
-                    <img 
-                    src={convertedImgSrc}
-                    alt=''
-                    />
-                )
-            }
-        </>
+            <div className="image">
+                {imgSrc&&
+                    (
+                        <img 
+                            src={imgSrc}
+                            alt=''
+                        />
+                    )
+                }
+                {convertedImgSrc&&
+                    (
+                        <img 
+                            src={convertedImgSrc}
+                            alt=''
+                        />
+                    )
+                }
+            </div>
+        </div>
     )
 }
 

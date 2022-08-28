@@ -1,8 +1,13 @@
+import Canvas from "../components/Canvas/Canvas"
 import FileUpload from "../components/FileUpload/FileUpload"
 
 const Home = () => {
     return (
-        <FileUpload/>
+        <div className="container">
+            <FileUpload/>
+            <Canvas/>
+        </div>
+        
     )
 }
 
