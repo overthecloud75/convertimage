@@ -1,0 +1,7 @@
+.canvasWrap {
+    text-align: center;
+    position: absolute;
+    z-index: 100;
+    background-color: white;
+    opacity: 0.7
+}

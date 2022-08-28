@@ -12,6 +12,9 @@
     - 0.1.4 (client)
         temperal canvas
 
+    - 0.1.5 (client)
+        mask with canvas
+
 to do list
     - client : canvas 
 

@@ -1,26 +1,13 @@
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.app {
-    display: flex;
+  margin: 0;
 }
 
 .container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  justify-content: space-between
 }
-
-
-
