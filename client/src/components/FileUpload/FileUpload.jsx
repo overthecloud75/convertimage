@@ -21,9 +21,9 @@ const FileUpload = () => {
         handleFile(e.target.files)
     }
 
-    const handleFile = (fileList) => {
-        setFile(fileList[0])
-        setImgSrc(URL.createObjectURL(fileList[0]))
+    const handleFile = (files) => {
+        setFile(files[0])
+        setImgSrc(URL.createObjectURL(files[0]))
     }
 
     const handleClick = () => {
@@ -32,13 +32,32 @@ const FileUpload = () => {
         }
     }
 
+    // "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAADElEQVQImWNgoBMAAABpAAFEI8ARAAAAAElFTkSuQmCC"
+    const dataURLtoFile = (dataurl, name='mask.png') => {
+        const arr = dataurl.split(',')
+        const mime = arr[0].match(/:(.*?);/)[1]
+        const bstr = atob(arr[1])
+        let n = bstr.length
+        const u8arr = new Uint8Array(n)
+        while (n) {
+            u8arr[n - 1] = bstr.charCodeAt(n - 1)
+            n -= 1 // to make eslint happy
+        }
+        return new File([u8arr], name, { type: mime })
+    }
+
     // submit original image and mask image 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        // get maskfile 
+        const maskFile = dataURLtoFile(canvasRef.current.toDataURL())
+        
         const url = '/uploadFile/'
-        const formData = new FormData()
+        let formData = new FormData()
         formData.append('file', file)
-        formData.append('fileName', file.name)
+        formData.append('mask', maskFile)
+
         const config = {
             headers: {
                 'content-type': 'multipart/form-data',
@@ -54,11 +73,6 @@ const FileUpload = () => {
         catch(err) {
             console.log('err', err)
         }
-       
-        // get image from canvas 
-        const image = new Image()
-        image.src = canvasRef.current.toDataURL()
-        console.log('image', image)
     }
 
     // handle drag events
